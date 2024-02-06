@@ -3,17 +3,19 @@ import Navbar from "./components/navbar";
 import "./styles.css";
 import { useForm } from "react-hook-form";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const auth = getAuth();
-
+    const navigate = useNavigate();
     const signUpUser = (data) => {
         const { email, password } = data;
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Handle successful account creation
                 const user = userCredential.user;
+                navigate('/signin');
             })
             .catch((error) => {
                 // Handle errors
