@@ -1,17 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SignIn from './signin';
+import Signup from './signup';
+import Home from './home';
+
+
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDaED4NMYuyIi2SP5yLCl2q2Ub5EAZabLU",
+  authDomain: "meme-a679b.firebaseapp.com",
+  projectId: "meme-a679b",
+  storageBucket: "meme-a679b.appspot.com",
+  messagingSenderId: "482739488218",
+  appId: "1:482739488218:web:1f08c3d57990e2c8392ce3"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
+    <React.StrictMode>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Signup />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/home" element={<Home />} />
+          
+        
+           
+        </Routes>
+      </BrowserRouter>
   </React.StrictMode>
-);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+);
