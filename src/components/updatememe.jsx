@@ -14,7 +14,7 @@ function UpdateMeme() {
     const [memeid, setMemeid] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:5000/getmeme', {
+        fetch('https://meme-gen-sqon.onrender.com/getmeme', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ function UpdateMeme() {
         if (user) {
             const token = await user.getIdToken();
     
-            fetch(`http://localhost:5000/updatememe`, {
+            fetch(`https://meme-gen-sqon.onrender.com/updatememe`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

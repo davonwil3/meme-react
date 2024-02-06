@@ -43,7 +43,7 @@ function AddMeme() {
             const image = document.querySelector('img[src="' + selectedImage + '"]');
             const id = image.getAttribute('data-id');
     
-            fetch('http://localhost:5000/addnewmeme', {
+            fetch('https://meme-gen-sqon.onrender.com/addnewmeme', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

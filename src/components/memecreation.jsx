@@ -9,7 +9,7 @@ const MemeCreation = React.memo((props) => {
     console.log(props);
 
     useEffect(() => {
-        fetch('http://localhost:5000/getimage', {
+        fetch('https://meme-gen-sqon.onrender.com/getimage', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

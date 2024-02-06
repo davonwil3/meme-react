@@ -7,7 +7,7 @@ function DeleteMeme() {
     const [memes, setMemes] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/getmeme', {
+        fetch('https://meme-gen-sqon.onrender.com/getmeme', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ function DeleteMeme() {
         if (user) {
             const token = await user.getIdToken();
     
-            fetch(`http://localhost:5000/deletememe?meme_id=${id}`, {
+            fetch(`https://meme-gen-sqon.onrender.com/deletememe?meme_id=${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

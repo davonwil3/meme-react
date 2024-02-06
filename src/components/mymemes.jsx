@@ -13,7 +13,7 @@ function MyMemes() {
     
 
     useEffect(() => {
-        fetch('http://localhost:5000/getmeme', {
+        fetch('https://meme-gen-sqon.onrender.com/getmeme', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
