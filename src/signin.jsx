@@ -1,9 +1,8 @@
 import React from 'react';
-import Navbar from './components/navbar';
-import './styles.css';
 import { useForm } from 'react-hook-form';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
+import Navbar from './components/navbar';
 
 function SignIn() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -12,16 +11,16 @@ function SignIn() {
 
     const onSubmit = data => {
         const { email, password } = data;
-        signInWithEmailAndPassword(auth, email, password)
+
+        setPersistence(auth, browserLocalPersistence)
+            .then(() => {
+                return signInWithEmailAndPassword(auth, email, password);
+            })
             .then((userCredential) => {
-                // Handle successful sign in
-                const user = userCredential.user;
                 navigate('/home');
             })
             .catch((error) => {
-                // Handle errors
-                const errorCode = error.code;
-                const errorMessage = error.message;
+                console.error(error.code, error.message);
             });
     };
 
@@ -29,7 +28,7 @@ function SignIn() {
         <div>
             <Navbar />
             <div className="signup-home">
-                <h1 style={{color : 'white'}}>Sign In</h1>
+                <h1 style={{color: 'white'}}>Sign In</h1>
                 <div id="sign-in" style={{marginBottom: "70px"}}>
                     <form className='signin-form' onSubmit={handleSubmit(onSubmit)}>
                         <label htmlFor="email">Email:</label><br />
