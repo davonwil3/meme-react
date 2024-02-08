@@ -21,18 +21,20 @@ initializeApp(firebaseConfig);
 
 function App() {
   const navigate = useNavigate();
+
   useEffect(() => {
     const auth = getAuth();
-    onAuthStateChanged(auth, user => {
-      if (user) {
-        // User is signed in, navigate to the home page
-        navigate('/home');
-      } else {
-        // User is signed out, navigate to the sign-in page
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      // Check if there's no user and the current path isn't leading to sign-in or sign-up page
+      if (!user && !['/signin', '/signup'].includes(window.location.pathname)) {
         navigate('/signin');
       }
     });
+
+    // Cleanup subscription on component unmount
+    return () => unsubscribe();
   }, [navigate]);
+
 
   return (
     <Routes>
